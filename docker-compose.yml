@@ -1,0 +1,7 @@
+# No need to edit this file
+version: "3.6"
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:5000:5000"

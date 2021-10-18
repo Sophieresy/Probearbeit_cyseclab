@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}{% endblock %}
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='libs/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    {% block head %}{% endblock %}
+</head>
+<body class="page d-flex flex-column min-vh-100">
+{% block modal %}{% endblock %}
+
+<div class="main">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="{{ url_for('static', filename='libs/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='libs/bootstrap/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
