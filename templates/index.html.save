@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>
+        Guestbook
+    </title>
+{% endblock %}
+
+{% block content %}
+    {# The existing code only serves as a start, so it does not have to be adopted and can be completely replaced. #}
+    <div class="container py-5">
+        <form id="inputForm">
+            <div class="form-group">
+                <label for="inputField">Input: </label>
+                <input id="inputField" class="form-control" required>
+                <small class="text-muted">You are allowed to post links in here.</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Post</button>
+        </form>
+
+        <div id="target">
+            <div class="card my-5">
+                <h5 class="card-header">Post</h5>
+                <div class="card-body">
+                    <p class="card-text">I really like the new design of the guestbook.</p>
+                </div>
+            </div>
+
+            <div class="card my-5">
+                <h5 class="card-header">Post</h5>
+                <div class="card-body">
+                    <p class="card-text">Hey, take a look at this cool video: <a
+                            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">LINK</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('#inputForm').on('submit', function () {
+            let postContent = $('#inputField').val();
+
+		letlink_ url;
+		try {
+		 link_ url = new URL(postContent);
+		new_link = '<a href="' + link_url + '">Link</a>' $('#target').append($('' +
+                '<div class="card my-5">' +
+                    '<h5 class="card-header">Post</h5>' +
+                    '<div class="card-body">' +
+                        '<p class="card-text">' + postContent + '</p>' +
+                    '</div>' +
+                '</div>' +
+                ''));
+				
+ 		 } catch (_) {
+  		  return false;  
+  		}
+    
+        // TODO: check if input contains URL. If yes: replace URL in postContent with an a-HTMLTag (<a href=...)
+
+            // add new post with postContent (intentional vulnerable to XSS)
+            $('#target').append($('' +
+                '<div class="card my-5">' +
+                    '<h5 class="card-header">Post</h5>' +
+                    '<div class="card-body">' +
+                        '<p class="card-text">' + postContent + '</p>' +
+                    '</div>' +
+                '</div>' +
+                ''));
+
+            // return false to not submit form
+            return false;
+        });
+
+        // TODO: validate if user solved challenge by intercepting call to alert
+    </script>
+{% endblock %}

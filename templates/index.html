@@ -8,12 +8,83 @@
 
 {% block content %}
     {# The existing code only serves as a start, so it does not have to be adopted and can be completely replaced. #}
+	<header>
+    <center><h1>Herzlich willkommen! Das sind meine Lieblings Gedichte!</h1></center>
+  </header>
+  <p><h6>Schon Lange Ein Klassiker, aber auch mein Favorit:</h6><br />
+	Herr von Ribbeck auf Ribbeck im Havelland, <br />
+Ein Birnbaum in seinem Garten stand,<br />
+Und kam die goldene Herbsteszeit<br />
+<br />
+Und die Birnen leuchteten weit und breit,<br />
+Da stopfte, wenn's Mittag vom Turme scholl,<br />
+Der von Ribbeck sich beide Taschen voll,<br />
+Und kam in Pantinen ein Junge daher,<br />
+So rief er: »Junge, wiste 'ne Beer?«<br />
+Und kam ein Mädel, so rief er: »Lütt Dirn,<br />
+Kumm man röwer, ick hebb 'ne Birn.«<br />
+<br />
+So ging es viel Jahre, bis lobesam<br />
+Der von Ribbeck auf Ribbeck zu sterben kam.<br />
+
+Er fühlte sein Ende. 's war Herbsteszeit,<br />
+Wieder lachten die Birnen weit und breit;<br />
+Da sagte von Ribbeck: »Ich scheide nun ab.<br />
+Legt mir eine Birne mit ins Grab.«<br />
+Und drei Tage drauf, aus dem Doppeldachhaus,<br />
+Trugen von Ribbeck sie hinaus,<br />
+Alle Bauern und Büdner mit Feiergesicht<br />
+Sangen »Jesus meine Zuversicht«,<br />
+Und die Kinder klagten, das Herze schwer:<br />
+»He is dod nu. Wer giwt uns nu 'ne Beer?«<br />
+<br />
+So klagten die Kinder. Das war nicht recht -<br />
+Ach, sie kannten den alten Ribbeck schlecht;<br />
+Der neue freilich, der knausert und spart,<br />
+Hält Park und Birnbaum strenge verwahrt.<br />
+Aber der alte, vorahnend schon<br />
+Und voll Mißtraun gegen den eigenen Sohn,<br />
+Der wußte genau, was damals er tat,<br />
+Als um eine Birn' ins Grab er bat,<br />
+Und im dritten Jahr aus dem stillen Haus<br />
+Ein Birnbaumsprößling sproßt heraus.<br />
+<br />
+Und die Jahre gingen wohl auf und ab,<br />
+Längst wölbt sich ein Birnbaum über dem Grab,<br />
+Und in der goldenen Herbsteszeit<br />
+Leuchtet's wieder weit und breit.<br />
+Und kommt ein Jung' übern Kirchhof her,<br />
+So flüstert's im Baume: »Wiste 'ne Beer?«<br />
+Und kommt ein Mädel, so flüstert's: »Lütt Dirn,<br />
+Kumm man röwer, ick gew' di 'ne Birn.«<br />
+<br />
+So spendet Segen noch immer die Hand<br />
+Des von Ribbeck auf Ribbeck im Havelland.<br />
+<br />
+<p> 
+<h6>Mondnacht- Eines der besten Gedichte der deutschen Spätromantik</h6><br />
+Es war, als hätt’ der Himmel<br />
+Die Erde still geküßt,<br />
+Daß sie im Blütenschimmer<br />
+Von ihm nun träumen müßt'.<br />
+<br />
+Die Luft ging durch die Felder,<br />
+Die Ähren wogten sacht,<br />
+Es rauschten leis’ die Wälder,<br />
+So sternklar war die Nacht.<br />
+<br />
+Und meine Seele spannte<br />
+Weit ihre Flügel aus,<br />
+Flog durch die stillen Lande,<br />
+Als flöge sie nach Haus.<br />
+</p>
+  </p>
     <div class="container py-5">
         <form id="inputForm">
             <div class="form-group">
                 <label for="inputField">Input: </label>
                 <input id="inputField" class="form-control" required>
-                <small class="text-muted">You are allowed to post links in here.</small>
+                <small class="text-muted">Lasst auch ihr mir gerne einen Link zu eurem Lieblings Gedicht da!</small>
             </div>
             <button type="submit" class="btn btn-primary btn-lg">Post</button>
         </form>
@@ -22,15 +93,15 @@
             <div class="card my-5">
                 <h5 class="card-header">Post</h5>
                 <div class="card-body">
-                    <p class="card-text">I really like the new design of the guestbook.</p>
+                    <p class="card-text">Richtig gute Idee mit den Gedichten!</p>
                 </div>
             </div>
 
             <div class="card my-5">
                 <h5 class="card-header">Post</h5>
                 <div class="card-body">
-                    <p class="card-text">Hey, take a look at this cool video: <a
-                            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">LINK</a></p>
+                    <p class="card-text">Schon seit dem Kindergarten ist das mein Lieblingsgedicht: <a
+                            href="http://www.gedichtsuche.de/gedicht/items/Der+Herbst+steht+auf+der+Leiter+-+Hacks,+Peter.html" target="_blank">LINK</a></p>
                 </div>
             </div>
 
@@ -43,20 +114,65 @@
         $('#inputForm').on('submit', function () {
             let postContent = $('#inputField').val();
 
-            // TODO: check if input contains URL. If yes: replace URL in postContent with an a-HTMLTag (<a href=...)
-
-            // add new post with postContent (intentional vulnerable to XSS)
-            $('#target').append($('' +
+		let content="";
+		let rest = postContent;
+		while(!(rest === "") ){
+		if(rest.indexOf("http://")!=-1) {
+		
+		let start_url = rest.indexOf("http://");
+		let end_url= rest.substring(start_url).indexOf(" ");
+		
+		
+		if(end_url == -1){
+			new_link = '<a href="' + rest.substring(start_url) + '">Link</a>';
+			content+=rest.substring(0,start_url)+new_link;
+			rest ="";
+			}else{
+				new_link = '<a href="' + rest.substring(start_url,end_url+1) + '">Link</a>';
+				content+=rest.substring(0,start_url)+new_link; 
+				rest=rest.substring(end_url);	
+				
+				}
+		  
+		   
+ 		 } else {
+			if(rest.indexOf("https://")!=-1){
+			
+			let start_url = rest.indexOf("https://");
+			let end_url= rest.substring(start_url).indexOf(" ");
+			
+			if(end_url == -1){
+			new_link = '<a href="' + rest.substring(start_url) + '">Link</a>';
+			content+=rest.substring(0,start_url)+new_link;
+			rest ="";
+			
+			}else{
+			new_link = '<a href="' + rest.substring(start_url,end_url+1) + '">Link</a>';
+			content+=rest.substring(0,start_url)+new_link;
+			rest=rest.substring(end_url);
+			}
+			
+			}else{
+			content+=rest;
+			rest ="";
+			}		  
+  		}
+		}
+		
+		
+		
+		$('#target').append($('' +
                 '<div class="card my-5">' +
                     '<h5 class="card-header">Post</h5>' +
                     '<div class="card-body">' +
-                        '<p class="card-text">' + postContent + '</p>' +
+                        '<p class="card-text">' + content + '</p>' +
                     '</div>' +
                 '</div>' +
-                ''));
+                '')); 
+			return false; 
+    
 
-            // return false to not submit form
-            return false;
+
         });
 
         // TODO: validate if user solved challenge by intercepting call to alert
